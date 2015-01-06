@@ -1,10 +1,17 @@
-<blessed:form top="center" left="center" width="50%" height="50%" content="Hello!">
+<blessed:form top="center" left="center" width="50%" height="50%" content="Hello!" keys="true">
   <border type="line"></border>
 
-  <blessed:button mouse="true" keys="true" bg="white" shrink="true" padding="1" top="center" left="center" width="50%"  content="Hello world" onpress="doStuff">
+  <blessed:button mouse="true" keys="true" shrink="true" padding="1" top="center" left="center" width="50%"  content="Push me!" onpress="doStuff">
     <style bg="blue">
       <focus bg="red"></focus>
       <hover bg="red"></hover>
+    </style>
+    <border type="line"></border>
+  </blessed:button>
+  <blessed:button mouse="true" keys="true" shrink="true" padding="1" top="2" left="center" width="50%" content="Me too!" onpress="doStuff2">
+    <style bg="blue">
+      <focus bg="black"></focus>
+      <hover bg="black"></hover>
     </style>
     <border type="line"></border>
   </blessed:button>
