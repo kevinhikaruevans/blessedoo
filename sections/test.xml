@@ -1,14 +1,17 @@
-<blessed:form top="center" left="center" width="50%" height="50%" content="Hello!" keys="true">
+<blessed:form top="center" left="center" width="70%" height="50%" content="Hello! Press Q to exit." keys="true" id="main">
   <border type="line"></border>
-
-  <blessed:button mouse="true" keys="true" shrink="true" padding="1" top="center" left="center" width="50%"  content="Push me!" onpress="doStuff">
+  <blessed:list mouse="true" keys="true" shrink="true" padding="1" top="20%" left="center" height="30%" width="100%" id="myListView" selectedFg="blue">
+    <border type="line"></border>
+  </blessed:list>
+  <blessed:button mouse="true" keys="true" shrink="true" padding="1" top="70%" left="0%" width="50%"  content="Push me!" onpress="doStuff">
     <style bg="blue">
       <focus bg="red"></focus>
       <hover bg="red"></hover>
     </style>
     <border type="line"></border>
   </blessed:button>
-  <blessed:button mouse="true" keys="true" shrink="true" padding="1" top="2" left="center" width="50%" content="Me too!" onpress="doStuff2">
+
+  <blessed:button mouse="true" keys="true" shrink="true" padding="1" top="70%" left="50%" width="50%" content="Me too!" onpress="doStuff2">
     <style bg="blue">
       <focus bg="black"></focus>
       <hover bg="black"></hover>

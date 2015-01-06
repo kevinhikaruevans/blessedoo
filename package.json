@@ -1,9 +1,21 @@
 {
   "name": "blessedoo",
-  "version": "0.0.1",
+  "version": "0.0.1e",
   "author": "Kevin Hikaru Evans <hello@kevinevans.name>",
   "dependencies": {
     "blessed": "*",
     "xml2js": "*"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kevinhikaruevans/blessedoo"
+  },
+  "bugs": {
+    "email": "npm-@googlegroups.com",
+    "url": "http://github.com/kevinhikaruevans/blessedoo/issues"
+  },
+  "main": "blessedoo",
+  "homepage": "https://github.com/kevinhikaruevans/blessedoo",
+  "keywords": "textui, tui, blessed, blessedoo, terminal, curses, ncurses, mvc",
+  "license": "BSD"
 }

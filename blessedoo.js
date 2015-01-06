@@ -3,8 +3,8 @@ var fs = require('fs'),
   blessed = require('blessed');
 
 var blessedoo = function() {
-  var EVENTS = ['click', 'press'];
   var views = {};
+  var elementsWithId = {};
   var screen = blessed.screen();
 
   screen.key('q', function() {
@@ -93,6 +93,8 @@ var blessedoo = function() {
       });
       
       var element = blessed[getBlessedName(xmlKey)](options);
+      if(options && options.id)
+        elementsWithId[options.id] = element;
       events.forEach(function(e) {
         element.on(e.substring(2), context[options[e]]);
       });
@@ -111,6 +113,9 @@ var blessedoo = function() {
   }
 
   return {
+    getElementById: function(id) {
+      return elementsWithId[id] || null;
+    },
     getScreen: function() { return screen; },
     render: function() {
       screen.render();
