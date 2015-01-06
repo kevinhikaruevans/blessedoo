@@ -1,0 +1,8 @@
+<blessed:form top="center" left="center" width="50%" height="50%" content="Hello!">
+  <border type="line"></border>
+
+  <blessed:button mouse="true" keys="true" shrink="true" padding="1" top="center" left="center" width="50%"  content="Hello world" onpress="doStuff">
+    <style bg="blue"></style>
+    <border type="line"></border>
+  </blessed:button>
+</blessed:form>
