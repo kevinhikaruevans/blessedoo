@@ -28,7 +28,37 @@ var blessedoo = function() {
   function getBlessedName(str) {
     return str.indexOf('blessed:') === 0 && str.substring(8);
   }
+  function flattenAttributeNode(options, key, node) {
+    // options = {}, key = 'style', node = dict
+    var o = {};
+    function flatten(obj) {
+      var next = obj[Object.keys(obj)[0]];
+      if(typeof(next) == 'object')
+        return flatten(next);
+      return obj;
+    }
+    Object.keys(node).forEach(function(subkey) {
 
+      var value = node[subkey];
+      if(subkey == 'attributes') {
+        // handle attributes
+        var tmpKey = Object.keys(value)[0];
+        o[tmpKey] = value[tmpKey];
+      } else {
+        // handle object
+        o[subkey] = flatten(value);
+      }
+    });
+    
+    options[key] = o;
+  }
+  function cleanAttributes(attributes) {
+    Object.keys(attributes).forEach(function(k) {
+      if(attributes[k] === 'true')
+        attributes[k] = true;
+    });
+    return attributes;
+  }
   function parseView(data, context, callback) {
     var rootType = Object.getOwnPropertyNames(data);
     
@@ -51,14 +81,15 @@ var blessedoo = function() {
       var keys = Object.keys(xmlNode);
       
       //var options = xmlNode.attributes;
-      var options = xmlNode.attributes || {};
-      options.parent = parent;
-      var events = getEventAttributes(Object.keys(options));
-      var blessedNodes = getBlessedNodes(keys);
+      var options         = cleanAttributes(xmlNode.attributes) || {};
+      var events          = getEventAttributes(Object.keys(options));
+      var blessedNodes    = getBlessedNodes(keys);
       var nonBlessedNodes = getNonBlessedNodes(keys);
+      options.parent      = parent;
 
       nonBlessedNodes.forEach(function(key) {
-        options[key] = xmlNode[key][0].attributes; // this wont work for bg
+        flattenAttributeNode(options, key, xmlNode[key][0]);
+        //options[key] = flattenAttributeNode(xmlNode[key][0]); // this wont work for bg
       });
       
       var element = blessed[getBlessedName(xmlKey)](options);
@@ -74,7 +105,6 @@ var blessedoo = function() {
       });
     }
     
-
     traverseXMLNode(rootType, data[rootType], null);
     callback(null, rootElement);
     return rootElement;
