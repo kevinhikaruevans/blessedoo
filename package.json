@@ -1,0 +1,9 @@
+{
+  "name": "blessedoo",
+  "version": "0.0.1",
+  "author": "Kevin Hikaru Evans <hello@kevinevans.name>",
+  "dependencies": {
+    "blessed": "*",
+    "xml2js": "*"
+  }
+}
