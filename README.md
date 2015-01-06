@@ -45,6 +45,21 @@ You can load views by using the blessedoo `loadView` method:
       </blessed:button>
     </blessed:form>
 
+IDs
+--------
+The purpose of IDs is to uniquely identify an element. This is similar to HTML. 
+
+To retrieve an element, just call `blessedoo.getElementById('myUniqueName')`.
+
+For lists, you MUST do this as there is currently no way to insert items from the XML. It is done after the XML compilation.
+
+      <blessed:list mouse="true" keys="true" shrink="true" padding="1" top="20%" left="center" height="30%" width="100%" id="myListView" selectedFg="blue">
+        <border type="line"></border>
+      </blessed:list>
+  
+      var list = blessedoo.getElementById('myListView');
+      list.setItems(['item one', 'item two']);
+  
 A simple button example
 --------
 Using blessedoo, it would look like this:
