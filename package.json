@@ -1,6 +1,6 @@
 {
   "name": "blessedoo",
-  "version": "0.0.1e",
+  "version": "0.0.3",
   "author": "Kevin Hikaru Evans <hello@kevinevans.name>",
   "dependencies": {
     "blessed": "*",

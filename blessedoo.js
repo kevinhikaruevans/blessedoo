@@ -56,7 +56,11 @@ var blessedoo = function() {
     Object.keys(attributes).forEach(function(k) {
       if(attributes[k] === 'true')
         attributes[k] = true;
+      if(~~attributes[k] === parseInt(attributes[k], 10))
+        attributes[k] = ~~attributes[k];
+
     });
+    
     return attributes;
   }
   function parseView(data, context, callback) {
@@ -139,6 +143,8 @@ var blessedoo = function() {
         views[filename] = parseView(data, context, callback);
       });
       fs.readFile(filename, function(err, data) {
+        if(err)
+          return callback(err);
         parser.parseString(data);
       });
     }
