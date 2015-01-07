@@ -6,6 +6,7 @@ A basic form would look like this!
       <border type="line"></border>
     </blessed:form>
     
+![http://i.imgur.com/L66AOQk.png](http://i.imgur.com/L66AOQk.png)    
 Loading views
 --------
 You can load views by using the blessedoo `loadView` method:
