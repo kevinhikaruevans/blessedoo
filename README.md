@@ -1,4 +1,6 @@
-An incomplete MVC xml wrapper for blessed, a curses-like library.  All blessed objects utilize the 'blessed' namespace. All subproperties of the options utilize their own xml subnode.
+An incomplete MVC xml wrapper for blessed, a curses-like library.
+
+All blessed objects utilize the 'blessed' namespace. All subproperties of the options utilize their own xml subnode.
 
 A basic form would look like this!
 
