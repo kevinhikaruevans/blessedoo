@@ -2,10 +2,11 @@ var fs = require('fs'),
   xml2js = require('xml2js'),
   blessed = require('blessed');
 
-var blessedoo = function() {
+var blessedoo = function(config) {
   var views = {};
   var elementsWithId = {};
-  var screen = blessed.screen();
+  config = typeof config === 'object' ? config : {};
+  var screen = blessed.screen(config);
 
   screen.key('q', function() {
     process.exit(0);
@@ -49,7 +50,7 @@ var blessedoo = function() {
         o[subkey] = flatten(value);
       }
     });
-    
+
     options[key] = o;
   }
   function cleanAttributes(attributes) {
@@ -60,21 +61,21 @@ var blessedoo = function() {
         attributes[k] = ~~attributes[k];
 
     });
-    
+
     return attributes;
   }
   function parseView(data, context, callback) {
     var rootType = Object.getOwnPropertyNames(data);
-    
+
     if(rootType.length !== 1 || !rootType[0] || !getBlessedName(rootType[0]))
       return callback(new Error('view must contain one single root blessed node'));
 
     // take the zeroth node (since there should be one root)...
     rootType = rootType[0];
-    
+
 
     // if it's null, then the prop doesn't exist in blessed and cannot be used... maybe check if function
-    
+
     if(!blessed[getBlessedName(rootType)])
       return callback(new Error('invalid blessed type used for root node'));
 
@@ -83,7 +84,7 @@ var blessedoo = function() {
     function traverseXMLNode(xmlKey, xmlNode, parent) {
       //console.log('key -> ', xmlKey, ' :: ', xmlNode);
       var keys = Object.keys(xmlNode);
-      
+
       //var options = xmlNode.attributes;
       var options         = cleanAttributes(xmlNode.attributes) || {};
       var events          = getEventAttributes(Object.keys(options));
@@ -95,7 +96,7 @@ var blessedoo = function() {
         flattenAttributeNode(options, key, xmlNode[key][0]);
         //options[key] = flattenAttributeNode(xmlNode[key][0]); // this wont work for bg
       });
-      
+
       var element = blessed[getBlessedName(xmlKey)](options);
       if(options && options.id)
         elementsWithId[options.id] = element;
@@ -110,7 +111,7 @@ var blessedoo = function() {
         }
       });
     }
-    
+
     traverseXMLNode(rootType, data[rootType], null);
     callback(null, rootElement);
     return rootElement;

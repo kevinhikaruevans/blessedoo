@@ -1,4 +1,6 @@
-var blessedoo = require('./blessedoo')();
+var blessedoo = require('./blessedoo')({
+  smartCSR: true
+});
 
 var context = {
   doStuff: function() {
